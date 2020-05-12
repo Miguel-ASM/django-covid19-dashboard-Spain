@@ -1,4 +1,5 @@
 # Import Built in modules
+import json
 from urllib.request import urlretrieve # retrieve files from urls
 import os # operative system utilities
 import re # regular expressions
@@ -175,7 +176,17 @@ def makeCommunitiesDataFrameDict(national_data_frame):
 
 # Create a class to contain all the data in a single object
 class Covid_data():
+
+    # Path to the json file with the geographical data
+    path_to_geoJSON = os.path.join(
+        os.path.dirname(__file__),
+        'static/dashboard/geoJSON/ign_spanish_adm1_ccaa_displaced_canary.json'
+    )
+
     def __init__(self):
+        with open(Covid_data.path_to_geoJSON,'r') as f:
+            self.geoJSON_dict_CCAA = json.load(f)
+        del(f)
         data_COVID19_spain = makeNationalDataFrame(downloadCSVfileObject())
         columns = list( data_COVID19_spain.columns )
         # Column names for the data
@@ -191,6 +202,22 @@ class Covid_data():
         active_cases_column_name = columns[9]
         cartodb_id_column_name = columns[10]
 
+
+        #Assign the previous values to instance attributes
+        self.column_names_dict = dict(
+            ISO_code_column_name = ISO_code_column_name,
+            date_column_name = date_column_name,
+            cases_column_name = cases_column_name,
+            PCR_column_name = PCR_column_name,
+            TestAC_column_name = TestAC_column_name,
+            Hospitalized_column_name = Hospitalized_column_name,
+            UCI_column_name = UCI_column_name,
+            deaths_column_name = deaths_column_name,
+            recovered_column_name = recovered_column_name,
+            active_cases_column_name = active_cases_column_name,
+            cartodb_id_column_name = cartodb_id_column_name
+        )
+
         data_COVID19_spain_last = pd.DataFrame(data_COVID19_spain[data_COVID19_spain[date_column_name]==max(data_COVID19_spain[date_column_name])])
         data_COVID19_spain_last.reset_index(drop=True,inplace=True)
 
@@ -199,10 +226,3 @@ class Covid_data():
         self.data_COVID19_spain = data_COVID19_spain
         self.communities_data_frames_dict = makeCommunitiesDataFrameDict(data_COVID19_spain)
         self.data_COVID19_spain_last = data_COVID19_spain_last
-
-
-# Path to the json file with the geographical data
-path_to_geoJSON = os.path.join(
-    os.path.dirname(__file__),
-    'assets/ign_spanish_adm1_ccaa_displaced_canary.json'
-)
