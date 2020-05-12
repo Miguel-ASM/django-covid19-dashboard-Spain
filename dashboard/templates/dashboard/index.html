@@ -1,0 +1,13 @@
+{% extends 'dashboard/base.html' %}
+
+<!-- Page title -->
+{% block title %}
+covid dashboard
+{% endblock %}
+
+<!-- Content -->
+{% block content %}
+<div class="container">
+  {{ example_plot|safe }}
+</div>
+{% endblock %}
