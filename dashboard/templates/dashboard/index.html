@@ -10,10 +10,21 @@ covid dashboard
 <div class="container">
   <div class="card shadow fade-in-bottom">
     <div class="card-body">
-      <div class="chart-line">
+      <div class="container">
         {{ example_plot|safe }}
       </div>
     </div>
   </div>
 </div>
+{% endblock %}
+
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('g.layer>rect').attr('style','fill: rgba(255, 0, 0, 255) !important');
+    console.log('Hello there')
+  });
+</script>
 {% endblock %}
