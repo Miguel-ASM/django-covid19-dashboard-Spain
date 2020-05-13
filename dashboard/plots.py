@@ -29,25 +29,25 @@ def total_cases_map():
 
     color_scale = ['#57ebde', '#6cedcd', '#7ceebd', '#88f0ac', '#91f29a', '#99f388', '#a0f575', '#a6f761', '#aaf94a', '#aefb2a']
 
-    fig = px.choropleth(df,
+    fig = px.choropleth_mapbox(df,
         geojson=data.geoJSON_dict_CCAA,
         color=cases_column_name,
         locations=cartodb_id_column_name,
         featureidkey="properties.cartodb_id",
-        projection="mercator",
         color_continuous_scale=color_scale,
+        mapbox_style = 'carto-positron',
+        center = {'lat':40.335280, 'lon':-3.697136 },
+        zoom = 4,
         hover_name= 'Comunidad',
         hover_data = [cases_column_name],
-        title = 'Casos totales',
+        opacity = 1.
     )
     fig.update_layout(
-        margin={"r":0,"t":0,"l":0,"b":0},
-        paper_bgcolor = 'rgba(0, 0, 0, 0)',
-        plot_bgcolor = 'rgba(0, 0, 0, 0)'
+        margin={"r":0,"t":0,"l":0,"b":0}
     )
-    fig.update_geos(
-        fitbounds="locations",
-        visible=False)
+    # fig.update_geos(
+    #     fitbounds="locations",
+    #     visible=False)
     plot_div = plot(
         fig,
         include_plotlyjs=False,
