@@ -42,8 +42,8 @@ def total_cases_map():
     )
     fig.update_layout(
         margin={"r":0,"t":0,"l":0,"b":0},
-        paper_bgcolor = 'rgba(0,0,0,0)',
-        plot_bgcolor = 'rgba(0,0,0,0)'
+        paper_bgcolor = 'rgba(0, 0, 0, 0)',
+        plot_bgcolor = 'rgba(0, 0, 0, 0)'
     )
     fig.update_geos(
         fitbounds="locations",
