@@ -218,11 +218,41 @@ class Covid_data():
             cartodb_id_column_name = cartodb_id_column_name
         )
 
+        # DataFrame for the last report
         data_COVID19_spain_last = pd.DataFrame(data_COVID19_spain[data_COVID19_spain[date_column_name]==max(data_COVID19_spain[date_column_name])])
         data_COVID19_spain_last.reset_index(drop=True,inplace=True)
+        # Dictionary with time series for every CCAA
+        communities_data_frames_dict = makeCommunitiesDataFrameDict(data_COVID19_spain)
+
+        # Data set with the time series for all the country together
+        dates_list = list(dict.fromkeys(data_COVID19_spain[date_column_name]))
+        dates_list.sort()
+        data_COVID19_spain_sum = pd.DataFrame(
+            {
+                date_column_name:dates_list,
+                cases_column_name: sum( df[cases_column_name] for df in communities_data_frames_dict.values() ),
+                deaths_column_name: sum( df[deaths_column_name] for df in communities_data_frames_dict.values() ),
+                recovered_column_name: sum( df[recovered_column_name] for df in communities_data_frames_dict.values() ),
+                active_cases_column_name: sum( df[active_cases_column_name] for df in communities_data_frames_dict.values() )
+            }
+        )
 
         self.CCAA_dict = make_CCAA_dict()
         self.CCAA_cartodb_ID_dict = make_CCAA_cartodb_ID_dict()
         self.data_COVID19_spain = data_COVID19_spain
-        self.communities_data_frames_dict = makeCommunitiesDataFrameDict(data_COVID19_spain)
+        self.communities_data_frames_dict = communities_data_frames_dict
         self.data_COVID19_spain_last = data_COVID19_spain_last
+        self.data_COVID19_spain_sum = data_COVID19_spain_sum
+
+    def activesCasesIncrement(self):
+        active_cases_column_name = self.column_names_dict['active_cases_column_name']
+        date_column_name = self.column_names_dict['date_column_name']
+        df = pd.DataFrame(self.data_COVID19_spain_sum[[date_column_name,active_cases_column_name]]).tail(2)
+        prev_date, last_date = tuple( df[date_column_name] )
+        prev_active, last_active = tuple( df[active_cases_column_name] )
+        return {
+            'prev_date': prev_date,
+            'last_date': last_date,
+            'prev_active': prev_active,
+            'last_active': last_active
+        }
