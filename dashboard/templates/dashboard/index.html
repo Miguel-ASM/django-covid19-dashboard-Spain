@@ -8,7 +8,44 @@ covid dashboard
 <!-- Content -->
 {% block content %}
 <div class="container-fluid">
-  <div class="card shadow fade-in-bottom">
+
+  <!-- responsive row of cards with last report data -->
+  <div class="row">
+    <!-- Active Cases Card -->
+    <div class="col-lg-3 col-md-6 py-2">
+      <div class="card shadow">
+        <div class="card-body">
+          Activos
+        </div>
+      </div>
+    </div>
+    <!-- Deaths Card -->
+    <div class="col-lg-3 col-md-6 py-2">
+      <div class="card shadow">
+        <div class="card-body">
+          Deaths
+        </div>
+      </div>
+    </div>
+    <!-- Recovereds Card -->
+    <div class="col-lg-3 col-md-6 py-2">
+      <div class="card shadow">
+        <div class="card-body">
+          Recuperados
+        </div>
+      </div>
+    </div>
+    <!-- Total Confirmed Cases Card -->
+    <div class="col-lg-3 col-md-6 py-2">
+      <div class="card shadow">
+        <div class="card-body">
+          Confirmados
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Interactive map with the data -->
+  <div class="card shadow fade-in-bottom my-2">
     <div class="card-body">
       <div class="container">
         {{ example_plot|safe }}
