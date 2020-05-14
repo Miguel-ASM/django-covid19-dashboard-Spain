@@ -1,6 +1,5 @@
 asgiref==3.2.7
 attrs==19.3.0
-autopep8==1.5.2
 click==7.1.2
 click-plugins==1.1.1
 cligj==0.5.0
@@ -12,7 +11,6 @@ munch==2.5.0
 numpy==1.18.4
 pandas==1.0.3
 plotly==4.6.0
-pycodestyle==2.5.0
 pyproj==2.6.1.post1
 python-dateutil==2.8.1
 python-decouple==3.3
@@ -22,4 +20,3 @@ Shapely==1.7.0
 six==1.14.0
 sqlparse==0.3.1
 Unipath==1.1
-whitenoise==5.0.1
