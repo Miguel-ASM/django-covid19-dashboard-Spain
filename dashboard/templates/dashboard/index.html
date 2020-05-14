@@ -12,42 +12,43 @@ covid dashboard
   <!-- responsive row of cards with last report data -->
   <div class="row">
     <!-- Active Cases Card -->
-    <div class="col-lg-3 col-md-6 py-2">
-      <div class="card shadow">
+    <div class="col-lg-4 col-md-4 py-2">
+      <div class="card shadow bg-warning">
         <div class="card-body">
           Activos
         </div>
       </div>
     </div>
     <!-- Deaths Card -->
-    <div class="col-lg-3 col-md-6 py-2">
-      <div class="card shadow">
+    <div class="col-lg-4 col-md-4 py-2">
+      <div class="card shadow bg-danger">
         <div class="card-body">
           Deaths
         </div>
       </div>
     </div>
     <!-- Recovereds Card -->
-    <div class="col-lg-3 col-md-6 py-2">
-      <div class="card shadow">
+    <div class="col-lg-4 col-md-4 py-2">
+      <div class="card shadow bg-success">
         <div class="card-body">
           Recuperados
         </div>
       </div>
     </div>
-    <!-- Total Confirmed Cases Card -->
-    <div class="col-lg-3 col-md-6 py-2">
-      <div class="card shadow">
-        <div class="card-body">
-          Confirmados
-        </div>
-      </div>
+  </div>
+  <!-- Total Confirmed Cases Card -->
+  <div class="card shadow my-2 bg-primary text-secondary">
+    <div class="card-body">
+      Confirmados
     </div>
   </div>
   <!-- Interactive map with the data -->
   <div class="card shadow fade-in-bottom my-2 px-0 py-0" style="background-color:#d4dadc">
     <div class="card-body px-0 py-0">
       <div class="container mx-0 my-0">
+        <h2>
+          <small class="text-muted">Mapa | Casos Confirmados</small>
+        </h2>
         {{ example_plot|safe }}
       </div>
     </div>
@@ -59,9 +60,9 @@ covid dashboard
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
 <!-- <script type="text/javascript">
-  $(document).ready(function() {
-    $('.js-plotly-plot .plotly .cursor').css('cursor','pointer');
-    console.log('Hello there');
-  });
+$(document).ready(function() {
+$('.js-plotly-plot .plotly .cursor').css('cursor','pointer');
+console.log('Hello there');
+});
 </script> -->
 {% endblock %}
