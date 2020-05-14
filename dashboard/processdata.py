@@ -244,7 +244,7 @@ class Covid_data():
         self.data_COVID19_spain_last = data_COVID19_spain_last
         self.data_COVID19_spain_sum = data_COVID19_spain_sum
 
-    def activesCasesIncrement(self):
+    def activeCasesIncrement(self):
         active_cases_column_name = self.column_names_dict['active_cases_column_name']
         date_column_name = self.column_names_dict['date_column_name']
         df = pd.DataFrame(self.data_COVID19_spain_sum[[date_column_name,active_cases_column_name]]).tail(2)
