@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY', default=development_key)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default = True)
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['masimon.pythonanywhere.com','localhost']
 
 
 # Application definition
