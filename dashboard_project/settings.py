@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
-from decouple import config
 from unipath import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 development_key = '%2j_z#^x%+*=xrsbcf@)s=fez)17s&y3c7=l@_a!ygn6sc8*+y'
-SECRET_KEY = config('SECRET_KEY', default=development_key)
+SECRET_KEY = os.getenv('SECRET_KEY', default=development_key)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default = True)
+DEBUG = os.getenv('DEBUG', default = True)
 
 ALLOWED_HOSTS = ['masimon.pythonanywhere.com','localhost']
 
