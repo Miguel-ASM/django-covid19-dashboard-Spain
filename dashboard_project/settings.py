@@ -24,7 +24,10 @@ development_key = '%2j_z#^x%+*=xrsbcf@)s=fez)17s&y3c7=l@_a!ygn6sc8*+y'
 SECRET_KEY = os.getenv('SECRET_KEY', default=development_key)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', default = True)
+if os.getenv('DEBUG', default = True) == 'False':
+    DEBUG = False
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = ['masimon.pythonanywhere.com','localhost']
 
