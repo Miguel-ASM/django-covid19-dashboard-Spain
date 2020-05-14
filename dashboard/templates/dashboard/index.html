@@ -45,9 +45,9 @@ covid dashboard
     </div>
   </div>
   <!-- Interactive map with the data -->
-  <div class="card shadow fade-in-bottom my-2">
-    <div class="card-body">
-      <div class="container">
+  <div class="card shadow fade-in-bottom my-2 px-0 py-0">
+    <div class="card-body px-0 py-0">
+      <div class="container mx-0 my-0">
         {{ example_plot|safe }}
       </div>
     </div>
@@ -58,10 +58,10 @@ covid dashboard
 
 <!-- Specific JS goes HERE -->
 {% block javascripts %}
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $(document).ready(function() {
     $('g.layer>rect').attr('style','fill: rgba(255, 0, 0, 255) !important');
     console.log('Hello there')
   });
-</script>
+</script> -->
 {% endblock %}
