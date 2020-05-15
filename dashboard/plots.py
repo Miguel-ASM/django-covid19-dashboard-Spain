@@ -1,6 +1,5 @@
 # # Standard library imports
-# import json
-# from urllib.request import urlopen
+import os
 
 # Third party imports
 import pandas as pd
@@ -9,9 +8,15 @@ import plotly.graph_objs as go
 from plotly.graph_objs import Layout
 from plotly.offline import plot
 
-
 # Project dependencies imports
 from .processdata import Covid_data
+
+# Set mapbox custom style
+if os.getenv('MAPBOX_TOKEN'):
+    px.set_mapbox_access_token(os.getenv('MAPBOX_TOKEN'))
+    mapbox_style = os.getenv('MAPBOX_STYLE_URL')
+else:
+    mapbox_style = 'carto-positron'
 
 # Create an instace of the Covid_data class
 data = Covid_data()
@@ -35,7 +40,7 @@ def total_cases_map():
         locations=cartodb_id_column_name,
         featureidkey="properties.cartodb_id",
         color_continuous_scale=color_scale,
-        mapbox_style = 'carto-positron',
+        mapbox_style = mapbox_style,
         center = {'lat':40.335280, 'lon':-3.697136 },
         zoom = 4,
         hover_name= 'Comunidad',
