@@ -1,5 +1,5 @@
 {% extends 'dashboard/base.html' %}
-
+{% load dashboard_filters %}
 <!-- Page title -->
 {% block title %}
 covid dashboard
@@ -9,14 +9,18 @@ covid dashboard
 {% block content %}
 <div class="container-fluid">
 
+  <div class="alert bg-dark text-secondary" role="alert">
+    <i class="fas fa-info-circle fa-lg"></i> Datos actualizados el {{ activos.last_date|date:'j \d\e F' }}
+  </div>
   <!-- responsive row of cards with last report data -->
   <div class="row">
     <!-- Active Cases Card -->
     <div class="col-lg-4 col-md-4 py-2">
       <div class="card shadow bg-warning">
-        <div class="card-body">
+        <div class="card-body text-dark">
           <p style="text-align:center"><i class="fas fa-exclamation-triangle fa-2x"></i></p>
-          <p>{{activos.last_active}} Casos Activos</p>
+          <h4>Casos Activos: {{ activos.last_active|floatformat }}</h4>
+          <h4><small>{{ activos.variation|variation_since_last }} desde el {{ activos.prev_date|date:'j \d\e F' }} </small></h4>
         </div>
       </div>
     </div>
@@ -48,7 +52,7 @@ covid dashboard
     <div class="card-body px-0 py-0">
       <div class="container mx-0 my-0">
         <h2>
-          <small class="text-muted">Mapa | Casos Confirmados</small>
+          <small class="text-muted">Mapa | Casos Confirmados  ({{ activos.last_date|date:'j \d\e F' }})</small>
         </h2>
         {{ example_plot|safe }}
       </div>

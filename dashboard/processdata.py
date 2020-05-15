@@ -254,5 +254,6 @@ class Covid_data():
             'prev_date': prev_date,
             'last_date': last_date,
             'prev_active': prev_active,
-            'last_active': last_active
+            'last_active': last_active,
+            'variation': last_active - prev_active
         }
