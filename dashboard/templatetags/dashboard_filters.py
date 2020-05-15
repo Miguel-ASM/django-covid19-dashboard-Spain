@@ -3,7 +3,7 @@ register = template.Library()
 
 @register.filter(name='variation_since_last')
 def variation_since_last(value):
-    val_str = '{}'.format(value)
+    val_str = '{:.0f}'.format(value)
     if float(value) > 0:
         return '{} más'.format(val_str)
     else:

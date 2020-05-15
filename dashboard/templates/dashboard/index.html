@@ -10,51 +10,53 @@ covid dashboard
 <div class="container-fluid">
 
   <div class="alert bg-dark text-secondary" role="alert">
-    <i class="fas fa-info-circle fa-lg"></i> Datos actualizados el {{ activos.last_date|date:'j \d\e F' }}
+    <i class="fas fa-info-circle fa-lg"></i> Datos actualizados el {{ statusReport.last_date|date:'j \d\e F' }}
   </div>
   <!-- responsive row of cards with last report data -->
   <div class="row">
     <!-- Active Cases Card -->
     <div class="col-lg-4 col-md-4 py-2">
-      <div class="card shadow bg-warning">
-        <div class="card-body text-dark">
-          <p style="text-align:center"><i class="fas fa-exclamation-triangle fa-2x"></i></p>
-          <h4>Casos Activos: {{ activos.last_active|floatformat }}</h4>
-          <h4><small>{{ activos.variation|variation_since_last }} desde el {{ activos.prev_date|date:'j \d\e F' }} </small></h4>
+      <div class="card shadow bg-dark">
+        <div class="card-body text-secondary">
+          <h3 class="text-secondary">Casos Activos: {{ statusReport.last_active|floatformat }}</h3>
+          <h3 class="text-secondary"><small>{{ statusReport.variation_actives|variation_since_last }} desde el {{ statusReport.prev_date|date:'j \d\e F' }} </small></h3>
         </div>
       </div>
     </div>
     <!-- Deaths Card -->
     <div class="col-lg-4 col-md-4 py-2">
-      <div class="card shadow bg-danger">
-        <div class="card-body">
-          <p style="text-align:center"><i class="fas fa-exclamation-triangle fa-2x"></i></p>
+      <div class="card shadow bg-dark">
+        <div class="card-body text-secondary">
+          <h3 class="text-secondary">Muertes: {{ statusReport.last_deaths|floatformat }}</h3>
+          <h3 class="text-secondary"><small>{{ statusReport.variation_deaths|variation_since_last }} desde el {{ statusReport.prev_date|date:'j \d\e F' }} </small></h3>
         </div>
       </div>
     </div>
     <!-- Recovereds Card -->
     <div class="col-lg-4 col-md-4 py-2">
-      <div class="card shadow bg-success">
-        <div class="card-body">
-          <p style="text-align:center"><i class="fas fa-exclamation-triangle fa-2x"></i></p>
+      <div class="card shadow bg-dark">
+        <div class="card-body text-secondary">
+          <h3 class="text-secondary">Casos Activos: {{ statusReport.last_recovered|floatformat }}</h3>
+          <h3 class="text-secondary"><small>{{ statusReport.variation_recovered|variation_since_last }} desde el {{ statusReport.prev_date|date:'j \d\e F' }} </small></h3>
         </div>
       </div>
     </div>
   </div>
   <!-- Total Confirmed Cases Card -->
-  <div class="card shadow my-2 bg-primary text-secondary">
-    <div class="card-body">
-      Confirmados
+  <div class="card shadow my-2 bg-dark">
+    <div class="card-body text-secondary">
+      <h3 class="text-secondary">Recuperados: {{ statusReport.last_active|floatformat }}</h3>
+      <h3 class="text-secondary"><small>{{ statusReport.variation_actives|variation_since_last }} desde el {{ statusReport.prev_date|date:'j \d\e F' }} </small></h3>
     </div>
   </div>
   <!-- Interactive map with the data -->
   <div class="card shadow fade-in-bottom my-2 px-0 py-0" style="background-color:#1a1053">
     <div class="card-body px-0 py-0">
       <div class="container mx-0 my-0">
-        <h2>
-          <small class="text-muted">Mapa | Casos Confirmados  ({{ activos.last_date|date:'j \d\e F' }})</small>
-        </h2>
-        {{ example_plot|safe }}
+        <h3>
+          <small class="text-muted">Mapa | Casos Confirmados  ({{ statusReport.last_date|date:'j \d\e F' }})</small>
+        </h3>
+        {{ total_cases_map|safe }}
       </div>
     </div>
   </div>

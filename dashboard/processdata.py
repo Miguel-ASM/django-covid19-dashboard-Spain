@@ -244,16 +244,42 @@ class Covid_data():
         self.data_COVID19_spain_last = data_COVID19_spain_last
         self.data_COVID19_spain_sum = data_COVID19_spain_sum
 
-    def activeCasesIncrement(self):
-        active_cases_column_name = self.column_names_dict['active_cases_column_name']
+    def returnStatusReport(self):
         date_column_name = self.column_names_dict['date_column_name']
-        df = pd.DataFrame(self.data_COVID19_spain_sum[[date_column_name,active_cases_column_name]]).tail(2)
+        cases_column_name = self.column_names_dict['cases_column_name']
+        deaths_column_name = self.column_names_dict['deaths_column_name']
+        recovered_column_name = self.column_names_dict['recovered_column_name']
+        active_cases_column_name = self.column_names_dict['active_cases_column_name']
+
+        df = pd.DataFrame(
+            self.data_COVID19_spain_sum[
+                [
+                    date_column_name,
+                    cases_column_name,
+                    deaths_column_name,
+                    recovered_column_name,
+                    active_cases_column_name
+                ]
+            ]
+        ).tail(2)
         prev_date, last_date = tuple( df[date_column_name] )
+        prev_cases, last_cases = tuple( df[cases_column_name] )
+        prev_deaths, last_deaths = tuple( df[deaths_column_name] )
+        prev_recovered, last_recovered = tuple( df[recovered_column_name] )
         prev_active, last_active = tuple( df[active_cases_column_name] )
         return {
             'prev_date': prev_date,
             'last_date': last_date,
+            'prev_cases': prev_cases,
+            'last_cases': last_cases,
+            'prev_deaths': prev_deaths,
+            'last_deaths': last_deaths,
+            'prev_recovered': prev_recovered,
+            'last_recovered': last_recovered,
             'prev_active': prev_active,
             'last_active': last_active,
-            'variation': last_active - prev_active
+            'variation_cases': last_cases - prev_cases,
+            'variation_deaths': last_deaths - prev_deaths,
+            'variation_recovered': last_recovered - prev_recovered,
+            'variation_actives': last_active - prev_active
         }
