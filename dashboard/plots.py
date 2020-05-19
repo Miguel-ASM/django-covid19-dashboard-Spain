@@ -2,7 +2,6 @@
 import os
 
 # Third party imports
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
 from plotly.graph_objs import Layout
@@ -20,6 +19,65 @@ else:
 
 # Create an instace of the Covid_data class
 data = Covid_data()
+
+# Make a plot showing the evolution of the Outbreak in Spain
+def makeNationalGrowthPlot():
+    # Define basic layout of the plot
+    fig_layout = Layout(
+        legend = {'x':0,'y':1},
+        xaxis = {'showgrid': False, 'fixedrange':True},
+        yaxis = {'showgrid': False, 'fixedrange':True},
+        yaxis_title="Casos",
+        xaxis_title="",
+        margin={"r":10,"t":0,"l":10,"b":0},
+        template='plotly_white',
+        font=dict(color='#8898aa')
+    )
+
+    # data for the figure
+    df = data.data_COVID19_spain_sum
+    date_column_name = data.column_names_dict['date_column_name']
+    active_cases_column_name = data.column_names_dict['active_cases_column_name']
+    deaths_column_name = data.column_names_dict['deaths_column_name']
+    recovered_column_name = data.column_names_dict['recovered_column_name']
+
+    active_cases_trace = go.Scatter(
+        x=df[date_column_name], y=df[active_cases_column_name],
+        mode='none',
+        line=dict(width=0.0, color='rgb(131, 90, 241)'),
+        name = active_cases_column_name,
+        stackgroup='one' # define stack group
+    )
+    deaths_trace = go.Scatter(
+        x=df[date_column_name], y=df[deaths_column_name],
+        mode='none',
+        line=dict(width=0.0, color='rgb(131, 90, 241)'),
+        name = deaths_column_name,
+        stackgroup='one' # define stack group
+    )
+    recovered_trace = go.Scatter(
+        x=df[date_column_name], y=df[recovered_column_name],
+        mode='none',
+        line=dict(width=0.0, color='rgb(131, 90, 241)'),
+        name = recovered_column_name,
+        stackgroup='one' # define stack group
+    )
+
+    # Create the figure
+    fig = go.Figure(
+        layout = fig_layout,
+        data = [active_cases_trace,deaths_trace,recovered_trace]
+    )
+
+    # Create a div element which contains the figure
+    plot_div = plot(
+        fig,
+        include_plotlyjs=False,
+        output_type='div',
+        config = {'modeBarButtonsToRemove': ['pan2d','zoom2d','zoomIn2d','zoomOut2d','hoverClosestCartesian','autoScale2d','resetScale2d']}
+    )
+
+    return plot_div
 
 # Make a choropleth of the total cases for each CCAA
 def total_cases_map():
