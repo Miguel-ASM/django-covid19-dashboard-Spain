@@ -55,7 +55,7 @@ covid dashboard
   <!-- Row containing the map and the national growth plot -->
   <div class="row">
     <!-- The Map -->
-    <div class="col-lg-6">
+    <div class="col-lg-8">
       <div class="card shadow fade-in-bottom my-2">
         <div class="card-body plotly worldmap">
           <div class="chart">
@@ -63,16 +63,16 @@ covid dashboard
           </div>
         </div>
         <div style="position: absolute; padding:1.25rem 1.5rem;">
-          <h2 class="mb-0 text-mutted">Mapa</h2>
+          <h2 class="mb-0 text-light">Mapa</h2>
           <h4 class="text-uppercase text-light ls-1 mb-1">Casos totales acumulados</h4>
         </div>
       </div>
     </div>
 
     <!-- National growth plot -->
-    <div class="col-lg-6">
+    <div class="col-lg-4">
       <div class="card shadow fade-in-bottom my-2">
-        <h2>Evolución Nacional</h2>
+        <h2 class="ml-3 mt-1">Evolución Nacional</h2>
         <div class="card-body plotly worldmap">
           <div class="chart">
             {{ national_growth_plot|safe }}
