@@ -1,0 +1,26 @@
+<!-- custom template tag that will render the plots
+      of the growth in the  Spain regions-->
+
+<!-- Context dictionary
+context = {
+  'regions':[
+    {'name':name,'plot_div':plot_div},
+    ...
+  ]
+} -->
+
+<!-- Row tag for the regions plots -->
+<div class="row">
+  {% for region in regions %}
+    <div class="col-lg-4">
+      <div class="card shadow fade-in-bottom my-2">
+        <h2 class="ml-3 mt-1">{{ region.name }}</h2>
+        <div class="card-body plotly worldmap">
+          <div class="chart">
+            {{ region.plot_div|safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
