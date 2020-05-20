@@ -8,13 +8,18 @@ def index(request):
     statusReport = data.returnStatusReport()
     total_cases_map = plots.total_cases_map()
     national_growth_plot = plots.makeNationalGrowthPlot()
+
+    regions = plots.returnRegionsPlots()
+
+
     return render(
         request,
         'dashboard/index.html',
         {
             'total_cases_map': total_cases_map,
             'national_growth_plot': national_growth_plot,
-            'statusReport': statusReport
+            'statusReport': statusReport,
+            'regions': regions
         }
     )
 # Create your views here.
